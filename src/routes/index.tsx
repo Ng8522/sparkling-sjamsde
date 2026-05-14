@@ -110,7 +110,7 @@ function Index() {
             <a href="#services" className="hover:text-primary transition-colors">Services</a>
             <a href="#community" className="hover:text-primary transition-colors">Community</a>
             <a href="#about" className="hover:text-primary transition-colors">About</a>
-            <a href="#donate" className="hover:text-primary transition-colors">Events</a>
+            <a href="#events" className="hover:text-primary transition-colors">Events</a>
             <a
               href="#donate"
               className="inline-flex items-center gap-1.5 h-9 px-4 bg-primary text-primary-foreground rounded-md hover:bg-secondary transition-colors"
