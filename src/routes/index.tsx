@@ -141,7 +141,7 @@ function Index() {
           <div>
             <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
               <span className="size-1.5 rounded-full bg-primary" />
-              Pro Utilitate Hominum · Est. 1908
+              SJAM SDE · Est. 1990 · Pro Utilitate Hominum
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6">
               Serve with heart. Give with love.{" "}
@@ -180,7 +180,7 @@ function Index() {
             <div className="absolute -top-3 -right-3 size-16 rounded-full bg-secondary text-secondary-foreground grid place-items-center shadow-lg rotate-12">
               <div className="text-center leading-tight">
                 <div className="text-[9px] font-semibold uppercase tracking-widest opacity-80">Since</div>
-                <div className="text-base font-bold tabular-nums">1908</div>
+                <div className="text-base font-bold tabular-nums">1990</div>
               </div>
             </div>
           </div>
@@ -190,7 +190,7 @@ function Index() {
         <div className="border-y border-border bg-card/60 backdrop-blur">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
             {[
-              { v: "117+", l: "Years of Service" },
+              { v: "35+", l: "Years in Selangor" },
               { v: "24/7", l: "Emergency Ready" },
               { v: "1,200+", l: "Active Volunteers" },
               { v: "50k+", l: "Lives Touched" },
@@ -250,14 +250,14 @@ function Index() {
 
       {/* Community */}
       <section id="community" className="py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center">
           <img
             src={communityImg}
             alt="St John volunteers caring for the community"
             width={1200}
             height={800}
             loading="lazy"
-            className="w-full aspect-[3/2] object-cover rounded-2xl ring-1 ring-border"
+            className="w-full max-w-md mx-auto aspect-[4/3] object-cover rounded-2xl ring-1 ring-border shadow-xl shadow-primary/10"
           />
           <div>
             <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
@@ -392,7 +392,7 @@ function Index() {
                 <span className="font-semibold">SJAM Selangor</span>
               </div>
               <p className="text-sm text-muted-foreground max-w-[42ch] mb-6 leading-relaxed">
-                A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public since 1908.
+                A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public. SJAM SDE has served Selangor since 1990, under SJAM Malaysia (est. 1908).
               </p>
               <div className="space-y-1.5 text-sm text-muted-foreground">
                 <p>Selangor Darul Ehsan, Malaysia</p>
