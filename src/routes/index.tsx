@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock } from "lucide-react";
+import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart } from "lucide-react";
+
+const DONATE_URL = "#donate";
 import ambulanceImg from "@/assets/ambulance.jpg";
 import communityImg from "@/assets/community.jpg";
 
@@ -76,6 +78,19 @@ function StJohnCross({ className = "" }: { className?: string }) {
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
+      {/* Floating Side Donate Button */}
+      <a
+        href={DONATE_URL}
+        aria-label="Donate to SJAM SDE"
+        className="group fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-2 bg-gradient-to-b from-secondary to-primary text-primary-foreground py-5 px-2.5 rounded-l-xl shadow-2xl shadow-primary/30 hover:px-3.5 transition-all"
+      >
+        <Heart className="size-5 fill-current" />
+        <span className="[writing-mode:vertical-rl] rotate-180 text-xs font-semibold tracking-[0.2em] uppercase">
+          Donate Now
+        </span>
+        <span className="size-2 rounded-full bg-primary-foreground animate-pulse" />
+      </a>
+
       {/* Emergency Banner */}
       <div className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
@@ -141,7 +156,7 @@ function Index() {
           <div>
             <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
               <span className="size-1.5 rounded-full bg-primary" />
-              Pro Utilitate Hominum · Est. 1908
+              SJAM SDE · Est. 1990 · Pro Utilitate Hominum
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6">
               Serve with heart. Give with love.{" "}
@@ -180,7 +195,7 @@ function Index() {
             <div className="absolute -top-3 -right-3 size-16 rounded-full bg-secondary text-secondary-foreground grid place-items-center shadow-lg rotate-12">
               <div className="text-center leading-tight">
                 <div className="text-[9px] font-semibold uppercase tracking-widest opacity-80">Since</div>
-                <div className="text-base font-bold tabular-nums">1908</div>
+                <div className="text-base font-bold tabular-nums">1990</div>
               </div>
             </div>
           </div>
@@ -190,7 +205,7 @@ function Index() {
         <div className="border-y border-border bg-card/60 backdrop-blur">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
             {[
-              { v: "117+", l: "Years of Service" },
+              { v: "35+", l: "Years in Selangor" },
               { v: "24/7", l: "Emergency Ready" },
               { v: "1,200+", l: "Active Volunteers" },
               { v: "50k+", l: "Lives Touched" },
@@ -250,14 +265,14 @@ function Index() {
 
       {/* Community */}
       <section id="community" className="py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center">
           <img
             src={communityImg}
             alt="St John volunteers caring for the community"
             width={1200}
             height={800}
             loading="lazy"
-            className="w-full aspect-[3/2] object-cover rounded-2xl ring-1 ring-border"
+            className="w-full max-w-md mx-auto aspect-[4/3] object-cover rounded-2xl ring-1 ring-border shadow-xl shadow-primary/10"
           />
           <div>
             <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
@@ -288,6 +303,38 @@ function Index() {
       </section>
 
       {/* Events */}
+      {/* Donation Ad Banner */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <a
+          href={DONATE_URL}
+          className="group relative block overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/10 hover:border-primary/60 transition-all"
+        >
+          <div className="grid md:grid-cols-[auto_1fr_auto] items-center gap-6 p-6 md:p-7">
+            <div className="size-14 rounded-full bg-primary text-primary-foreground grid place-items-center shrink-0 shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+              <Heart className="size-6 fill-current" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2 py-0.5 rounded">
+                  Sponsored · SJAM SDE
+                </span>
+                <span className="hidden sm:inline text-[10px] uppercase tracking-widest text-muted-foreground">
+                  Tax Exempt
+                </span>
+              </div>
+              <h3 className="font-semibold text-base md:text-lg leading-snug">
+                RM50 sponsors one dialysis session for a B40 patient.
+                <span className="text-primary"> Donate today.</span>
+              </h3>
+            </div>
+            <div className="inline-flex items-center gap-2 h-11 px-5 bg-primary text-primary-foreground rounded-md font-medium text-sm shadow-md group-hover:bg-secondary transition-colors shrink-0">
+              Donate
+              <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </div>
+        </a>
+      </section>
+
       <section id="events" className="bg-muted/40 border-y border-border py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
@@ -392,7 +439,7 @@ function Index() {
                 <span className="font-semibold">SJAM Selangor</span>
               </div>
               <p className="text-sm text-muted-foreground max-w-[42ch] mb-6 leading-relaxed">
-                A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public since 1908.
+                A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public. SJAM SDE has served Selangor since 1990, under SJAM Malaysia (est. 1908).
               </p>
               <div className="space-y-1.5 text-sm text-muted-foreground">
                 <p>Selangor Darul Ehsan, Malaysia</p>
