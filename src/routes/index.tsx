@@ -287,8 +287,78 @@ function Index() {
         </div>
       </section>
 
+      {/* Events */}
+      <section id="events" className="bg-muted/40 border-y border-border py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+            <div>
+              <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
+                Upcoming Events
+              </span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-[22ch]">
+                Join us at our next community event.
+              </h2>
+            </div>
+            <a
+              href="#events"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary self-start md:self-auto"
+            >
+              View all events
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {events.map((e) => {
+              const [day, month] = e.date.split(" ");
+              return (
+                <article
+                  key={e.title}
+                  className="group bg-card rounded-xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col"
+                >
+                  <div className="flex items-stretch border-b border-border">
+                    <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground p-5 flex flex-col items-center justify-center min-w-[88px]">
+                      <div className="text-3xl font-bold tabular-nums leading-none">{day}</div>
+                      <div className="text-[10px] font-semibold uppercase tracking-widest mt-1 opacity-90">{month}</div>
+                    </div>
+                    <div className="flex-1 px-5 py-4 flex flex-col justify-center">
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-secondary mb-1">
+                        {e.tag}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{e.day}</span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-lg mb-4 leading-snug group-hover:text-primary transition-colors">
+                      {e.title}
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground mb-5">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="size-3.5 text-primary shrink-0" />
+                        <span>{e.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="size-3.5 text-primary shrink-0" />
+                        <span>{e.time}</span>
+                      </div>
+                    </div>
+                    <a
+                      href="#events"
+                      className="mt-auto inline-flex items-center justify-between text-sm font-medium text-primary border-t border-border pt-4 hover:text-secondary"
+                    >
+                      Register / Details
+                      <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Donation CTA */}
-      <section id="donate" className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="donate" className="max-w-7xl mx-auto px-6 py-24">
         <div className="bg-primary text-primary-foreground rounded-2xl p-10 md:p-16 relative overflow-hidden">
           <div className="relative z-10 max-w-xl">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase opacity-80 block mb-4">Support Our Mission</span>
