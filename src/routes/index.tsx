@@ -77,6 +77,8 @@ function StJohnCross({ className = "" }: { className?: string }) {
 }
 
 function Index() {
+  const [adOpen, setAdOpen] = useState(true);
+
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
       {/* Floating Side Donate Button */}
@@ -91,6 +93,49 @@ function Index() {
         </span>
         <span className="size-2 rounded-full bg-primary-foreground animate-pulse" />
       </a>
+
+      {/* Fixed Dismissible Donation Ad */}
+      {adOpen && (
+        <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 sm:max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="relative overflow-hidden rounded-2xl bg-card border border-border shadow-2xl shadow-primary/20 ring-1 ring-primary/10">
+            <button
+              onClick={() => setAdOpen(false)}
+              aria-label="Close"
+              className="absolute top-2.5 right-2.5 size-7 grid place-items-center rounded-full bg-muted text-muted-foreground hover:bg-foreground hover:text-background transition-colors z-10"
+            >
+              <X className="size-3.5" />
+            </button>
+            <div className="bg-gradient-to-br from-primary to-secondary p-5 text-primary-foreground">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-widest bg-primary-foreground/20 px-2 py-0.5 rounded">
+                  Sponsored
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="size-10 rounded-full bg-primary-foreground/15 grid place-items-center shrink-0">
+                  <Heart className="size-5 fill-current" />
+                </div>
+                <h3 className="font-semibold text-base leading-snug pr-6">
+                  Support our life-saving mission.
+                </h3>
+              </div>
+            </div>
+            <div className="p-4 flex items-center justify-between gap-3">
+              <p className="text-xs text-muted-foreground leading-snug">
+                Every contribution helps us serve the community.
+              </p>
+              <a
+                href={DONATE_URL}
+                onClick={() => setAdOpen(false)}
+                className="inline-flex items-center gap-1.5 h-9 px-4 bg-primary text-primary-foreground rounded-md font-medium text-sm hover:bg-secondary transition-colors shrink-0"
+              >
+                Donate
+                <ArrowRight className="size-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Emergency Banner */}
       <div className="bg-primary text-primary-foreground">
