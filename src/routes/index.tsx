@@ -78,6 +78,19 @@ function StJohnCross({ className = "" }: { className?: string }) {
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
+      {/* Floating Side Donate Button */}
+      <a
+        href={DONATE_URL}
+        aria-label="Donate to SJAM SDE"
+        className="group fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-2 bg-gradient-to-b from-secondary to-primary text-primary-foreground py-5 px-2.5 rounded-l-xl shadow-2xl shadow-primary/30 hover:px-3.5 transition-all"
+      >
+        <Heart className="size-5 fill-current" />
+        <span className="[writing-mode:vertical-rl] rotate-180 text-xs font-semibold tracking-[0.2em] uppercase">
+          Donate Now
+        </span>
+        <span className="size-2 rounded-full bg-primary-foreground animate-pulse" />
+      </a>
+
       {/* Emergency Banner */}
       <div className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
