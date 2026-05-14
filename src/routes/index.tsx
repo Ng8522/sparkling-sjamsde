@@ -1,7 +1,34 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight } from "lucide-react";
+import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, Calendar, MapPin, Clock } from "lucide-react";
 import ambulanceImg from "@/assets/ambulance.jpg";
 import communityImg from "@/assets/community.jpg";
+
+const events = [
+  {
+    date: "15 JUN",
+    day: "Sat",
+    title: "Community Blood Donation Drive",
+    location: "Klang Parade, Klang",
+    time: "9:00 AM – 4:00 PM",
+    tag: "Blood Donation",
+  },
+  {
+    date: "22 JUN",
+    day: "Sat",
+    title: "Public First Aid & CPR Course",
+    location: "SJAM HQ, Selangor",
+    time: "8:30 AM – 5:00 PM",
+    tag: "Training",
+  },
+  {
+    date: "06 JUL",
+    day: "Sat",
+    title: "Mobile Clinic — Kg. Sungai Pinang",
+    location: "Klang District",
+    time: "10:00 AM – 3:00 PM",
+    tag: "Outreach",
+  },
+];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -96,16 +123,31 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.2fr_0.9fr] gap-12 lg:gap-16 items-center">
+      <section className="relative overflow-hidden">
+        {/* Decorative gradient + cross pattern */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/10" />
+        <div
+          className="absolute inset-0 -z-10 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+            color: "var(--primary)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 size-[36rem] rounded-full bg-secondary/10 blur-3xl -z-10" />
+
+        <div className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-20 grid lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-20 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5">
-              <span className="h-px w-8 bg-primary" />
+            <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
+              <span className="size-1.5 rounded-full bg-primary" />
               Pro Utilitate Hominum · Est. 1908
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-balance mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6">
               Serve with heart. Give with love.{" "}
-              <span className="text-primary">For the Service of Mankind.</span>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                For the Service of Mankind.
+              </span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-[58ch] mb-10">
               Professional emergency medical response and community care across Selangor — sustained by volunteers, clinicians and your generosity.
@@ -113,14 +155,14 @@ function Index() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="tel:0333715005"
-                className="inline-flex items-center gap-2 h-12 px-6 bg-primary text-primary-foreground font-medium rounded-md hover:bg-secondary transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 h-12 px-6 bg-primary text-primary-foreground font-medium rounded-md hover:bg-secondary transition-colors shadow-lg shadow-primary/20"
               >
                 <Phone className="size-4" />
                 Request Ambulance
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 h-12 px-6 bg-accent text-accent-foreground font-medium rounded-md hover:bg-muted transition-colors border border-border"
+                className="inline-flex items-center gap-2 h-12 px-6 bg-card text-foreground font-medium rounded-md hover:bg-muted transition-colors border border-border"
               >
                 View Services
                 <ArrowRight className="size-4" />
@@ -133,13 +175,31 @@ function Index() {
               alt="St John Ambulance Malaysia ambulance on duty"
               width={1024}
               height={1280}
-              className="w-full aspect-[4/5] object-cover rounded-2xl shadow-2xl shadow-primary/10 ring-1 ring-border"
+              className="w-full max-w-sm mx-auto aspect-[3/4] object-cover rounded-2xl shadow-2xl shadow-primary/15 ring-1 ring-border"
             />
-            <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-5 shadow-lg hidden md:block">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Response Time</div>
-              <div className="text-2xl font-semibold tabular-nums">&lt; 15 min</div>
-              <div className="text-xs text-muted-foreground">Selangor metro average</div>
+            <div className="absolute -top-3 -right-3 size-16 rounded-full bg-secondary text-secondary-foreground grid place-items-center shadow-lg rotate-12">
+              <div className="text-center leading-tight">
+                <div className="text-[9px] font-semibold uppercase tracking-widest opacity-80">Since</div>
+                <div className="text-base font-bold tabular-nums">1908</div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Stats strip */}
+        <div className="border-y border-border bg-card/60 backdrop-blur">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+            {[
+              { v: "117+", l: "Years of Service" },
+              { v: "24/7", l: "Emergency Ready" },
+              { v: "1,200+", l: "Active Volunteers" },
+              { v: "50k+", l: "Lives Touched" },
+            ].map((s) => (
+              <div key={s.l} className="px-4 md:px-8 py-6 text-center md:text-left">
+                <div className="text-2xl md:text-3xl font-semibold text-primary tabular-nums">{s.v}</div>
+                <div className="text-[11px] md:text-xs uppercase tracking-widest text-muted-foreground mt-1">{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
