@@ -303,6 +303,38 @@ function Index() {
       </section>
 
       {/* Events */}
+      {/* Donation Ad Banner */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <a
+          href={DONATE_URL}
+          className="group relative block overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/10 hover:border-primary/60 transition-all"
+        >
+          <div className="grid md:grid-cols-[auto_1fr_auto] items-center gap-6 p-6 md:p-7">
+            <div className="size-14 rounded-full bg-primary text-primary-foreground grid place-items-center shrink-0 shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+              <Heart className="size-6 fill-current" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2 py-0.5 rounded">
+                  Sponsored · SJAM SDE
+                </span>
+                <span className="hidden sm:inline text-[10px] uppercase tracking-widest text-muted-foreground">
+                  Tax Exempt
+                </span>
+              </div>
+              <h3 className="font-semibold text-base md:text-lg leading-snug">
+                RM50 sponsors one dialysis session for a B40 patient.
+                <span className="text-primary"> Donate today.</span>
+              </h3>
+            </div>
+            <div className="inline-flex items-center gap-2 h-11 px-5 bg-primary text-primary-foreground rounded-md font-medium text-sm shadow-md group-hover:bg-secondary transition-colors shrink-0">
+              Donate
+              <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </div>
+        </a>
+      </section>
+
       <section id="events" className="bg-muted/40 border-y border-border py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
