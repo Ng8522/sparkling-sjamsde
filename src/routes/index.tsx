@@ -1,7 +1,34 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight } from "lucide-react";
+import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock } from "lucide-react";
 import ambulanceImg from "@/assets/ambulance.jpg";
 import communityImg from "@/assets/community.jpg";
+
+const events = [
+  {
+    date: "15 JUN",
+    day: "Sat",
+    title: "Community Blood Donation Drive",
+    location: "Klang Parade, Klang",
+    time: "9:00 AM – 4:00 PM",
+    tag: "Blood Donation",
+  },
+  {
+    date: "22 JUN",
+    day: "Sat",
+    title: "Public First Aid & CPR Course",
+    location: "SJAM HQ, Selangor",
+    time: "8:30 AM – 5:00 PM",
+    tag: "Training",
+  },
+  {
+    date: "06 JUL",
+    day: "Sat",
+    title: "Mobile Clinic — Kg. Sungai Pinang",
+    location: "Klang District",
+    time: "10:00 AM – 3:00 PM",
+    tag: "Outreach",
+  },
+];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -83,7 +110,7 @@ function Index() {
             <a href="#services" className="hover:text-primary transition-colors">Services</a>
             <a href="#community" className="hover:text-primary transition-colors">Community</a>
             <a href="#about" className="hover:text-primary transition-colors">About</a>
-            <a href="#donate" className="hover:text-primary transition-colors">Events</a>
+            <a href="#events" className="hover:text-primary transition-colors">Events</a>
             <a
               href="#donate"
               className="inline-flex items-center gap-1.5 h-9 px-4 bg-primary text-primary-foreground rounded-md hover:bg-secondary transition-colors"
@@ -96,16 +123,31 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.2fr_0.9fr] gap-12 lg:gap-16 items-center">
+      <section className="relative overflow-hidden">
+        {/* Decorative gradient + cross pattern */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/10" />
+        <div
+          className="absolute inset-0 -z-10 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+            color: "var(--primary)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 size-[36rem] rounded-full bg-secondary/10 blur-3xl -z-10" />
+
+        <div className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-20 grid lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-20 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5">
-              <span className="h-px w-8 bg-primary" />
+            <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
+              <span className="size-1.5 rounded-full bg-primary" />
               Pro Utilitate Hominum · Est. 1908
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-balance mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6">
               Serve with heart. Give with love.{" "}
-              <span className="text-primary">For the Service of Mankind.</span>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                For the Service of Mankind.
+              </span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-[58ch] mb-10">
               Professional emergency medical response and community care across Selangor — sustained by volunteers, clinicians and your generosity.
@@ -113,14 +155,14 @@ function Index() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="tel:0333715005"
-                className="inline-flex items-center gap-2 h-12 px-6 bg-primary text-primary-foreground font-medium rounded-md hover:bg-secondary transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 h-12 px-6 bg-primary text-primary-foreground font-medium rounded-md hover:bg-secondary transition-colors shadow-lg shadow-primary/20"
               >
                 <Phone className="size-4" />
                 Request Ambulance
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 h-12 px-6 bg-accent text-accent-foreground font-medium rounded-md hover:bg-muted transition-colors border border-border"
+                className="inline-flex items-center gap-2 h-12 px-6 bg-card text-foreground font-medium rounded-md hover:bg-muted transition-colors border border-border"
               >
                 View Services
                 <ArrowRight className="size-4" />
@@ -133,13 +175,31 @@ function Index() {
               alt="St John Ambulance Malaysia ambulance on duty"
               width={1024}
               height={1280}
-              className="w-full aspect-[4/5] object-cover rounded-2xl shadow-2xl shadow-primary/10 ring-1 ring-border"
+              className="w-full max-w-sm mx-auto aspect-[3/4] object-cover rounded-2xl shadow-2xl shadow-primary/15 ring-1 ring-border"
             />
-            <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-5 shadow-lg hidden md:block">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Response Time</div>
-              <div className="text-2xl font-semibold tabular-nums">&lt; 15 min</div>
-              <div className="text-xs text-muted-foreground">Selangor metro average</div>
+            <div className="absolute -top-3 -right-3 size-16 rounded-full bg-secondary text-secondary-foreground grid place-items-center shadow-lg rotate-12">
+              <div className="text-center leading-tight">
+                <div className="text-[9px] font-semibold uppercase tracking-widest opacity-80">Since</div>
+                <div className="text-base font-bold tabular-nums">1908</div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Stats strip */}
+        <div className="border-y border-border bg-card/60 backdrop-blur">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+            {[
+              { v: "117+", l: "Years of Service" },
+              { v: "24/7", l: "Emergency Ready" },
+              { v: "1,200+", l: "Active Volunteers" },
+              { v: "50k+", l: "Lives Touched" },
+            ].map((s) => (
+              <div key={s.l} className="px-4 md:px-8 py-6 text-center md:text-left">
+                <div className="text-2xl md:text-3xl font-semibold text-primary tabular-nums">{s.v}</div>
+                <div className="text-[11px] md:text-xs uppercase tracking-widest text-muted-foreground mt-1">{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -227,8 +287,78 @@ function Index() {
         </div>
       </section>
 
+      {/* Events */}
+      <section id="events" className="bg-muted/40 border-y border-border py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+            <div>
+              <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
+                Upcoming Events
+              </span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-[22ch]">
+                Join us at our next community event.
+              </h2>
+            </div>
+            <a
+              href="#events"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary self-start md:self-auto"
+            >
+              View all events
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {events.map((e) => {
+              const [day, month] = e.date.split(" ");
+              return (
+                <article
+                  key={e.title}
+                  className="group bg-card rounded-xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col"
+                >
+                  <div className="flex items-stretch border-b border-border">
+                    <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground p-5 flex flex-col items-center justify-center min-w-[88px]">
+                      <div className="text-3xl font-bold tabular-nums leading-none">{day}</div>
+                      <div className="text-[10px] font-semibold uppercase tracking-widest mt-1 opacity-90">{month}</div>
+                    </div>
+                    <div className="flex-1 px-5 py-4 flex flex-col justify-center">
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-secondary mb-1">
+                        {e.tag}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{e.day}</span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-lg mb-4 leading-snug group-hover:text-primary transition-colors">
+                      {e.title}
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground mb-5">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="size-3.5 text-primary shrink-0" />
+                        <span>{e.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="size-3.5 text-primary shrink-0" />
+                        <span>{e.time}</span>
+                      </div>
+                    </div>
+                    <a
+                      href="#events"
+                      className="mt-auto inline-flex items-center justify-between text-sm font-medium text-primary border-t border-border pt-4 hover:text-secondary"
+                    >
+                      Register / Details
+                      <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Donation CTA */}
-      <section id="donate" className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="donate" className="max-w-7xl mx-auto px-6 py-24">
         <div className="bg-primary text-primary-foreground rounded-2xl p-10 md:p-16 relative overflow-hidden">
           <div className="relative z-10 max-w-xl">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase opacity-80 block mb-4">Support Our Mission</span>
