@@ -1,0 +1,149 @@
+export type PortalEvent = {
+  id: string;
+  /** ISO date YYYY-MM-DD for calendar */
+  startsAt: string;
+  date: string;
+  day: string;
+  title: string;
+  location: string;
+  time: string;
+  tag: string;
+  description: string;
+  spots: number;
+  registered: number;
+};
+
+export type Course = {
+  id: string;
+  title: string;
+  level: string;
+  dates: string;
+  /** ISO dates for calendar sessions */
+  sessions: string[];
+  time: string;
+  location: string;
+  trainer: string;
+  fee: number;
+  seats: number;
+  enrolled: number;
+  certification: string;
+};
+
+export const portalEvents: PortalEvent[] = [
+  {
+    id: "blood-jun-15",
+    startsAt: "2026-06-15",
+    date: "15 JUN",
+    day: "Sat",
+    title: "Community Blood Donation Drive",
+    location: "Klang Parade, Klang",
+    time: "9:00 AM – 4:00 PM",
+    tag: "Blood Donation",
+    description:
+      "Open community blood donation drive in partnership with the national blood bank. Walk-ins welcome; bring MyKad and stay hydrated.",
+    spots: 120,
+    registered: 78,
+  },
+  {
+    id: "first-aid-jun-22",
+    startsAt: "2026-06-22",
+    date: "22 JUN",
+    day: "Sat",
+    title: "Public First Aid & CPR Course",
+    location: "SJAM HQ, Selangor",
+    time: "8:30 AM – 5:00 PM",
+    tag: "Training",
+    description:
+      "Accredited one-day CPR and basic trauma care certification for the public. Includes practical assessment and e-certificate.",
+    spots: 40,
+    registered: 31,
+  },
+  {
+    id: "clinic-jul-06",
+    startsAt: "2026-07-06",
+    date: "06 JUL",
+    day: "Sat",
+    title: "Mobile Clinic — Kg. Sungai Pinang",
+    location: "Klang District",
+    time: "10:00 AM – 3:00 PM",
+    tag: "Outreach",
+    description:
+      "Free basic health screening, consultation and medication guidance for underserved communities in Klang.",
+    spots: 200,
+    registered: 45,
+  },
+];
+
+export const courses: Course[] = [
+  {
+    id: "cpr-public",
+    title: "Public First Aid & CPR",
+    level: "Beginner",
+    dates: "Every 4th Saturday",
+    sessions: ["2026-06-28", "2026-07-26", "2026-08-23"],
+    time: "8:30 AM – 5:00 PM",
+    location: "SJAM SDE HQ, Selangor",
+    trainer: "Sr. Instructor Ahmad · SJAM National Faculty",
+    fee: 180,
+    seats: 40,
+    enrolled: 28,
+    certification: "SJAM CPR & Basic Trauma (2 years)",
+  },
+  {
+    id: "corporate-fa",
+    title: "Corporate First Responder",
+    level: "Intermediate",
+    dates: "On request (min. 15 pax)",
+    sessions: [],
+    time: "Custom schedule",
+    location: "Your premises or SJAM HQ",
+    trainer: "Assigned by Training Unit",
+    fee: 3200,
+    seats: 30,
+    enrolled: 12,
+    certification: "Corporate duty standby readiness",
+  },
+  {
+    id: "aed-workshop",
+    title: "AED & Cardiac Emergency Workshop",
+    level: "Intermediate",
+    dates: "12 Jul & 26 Jul 2026",
+    sessions: ["2026-07-12", "2026-07-26"],
+    time: "2:00 PM – 6:00 PM",
+    location: "SJAM SDE Training Hall",
+    trainer: "Dr. Lim · Emergency Medicine",
+    fee: 95,
+    seats: 25,
+    enrolled: 19,
+    certification: "AED competency certificate",
+  },
+];
+
+export const donationCampaigns = [
+  {
+    id: "ambulance",
+    title: "Ambulance Fleet Maintenance",
+    goal: 250000,
+    raised: 142500,
+  },
+  {
+    id: "dialysis",
+    title: "Subsidised Haemodialysis Fund",
+    goal: 180000,
+    raised: 96800,
+  },
+  {
+    id: "training",
+    title: "Youth First Aid Scholarship",
+    goal: 50000,
+    raised: 31200,
+  },
+];
+
+export function getEventById(id: string) {
+  return portalEvents.find((e) => e.id === id);
+}
+
+export function getCourseById(id: string) {
+  return courses.find((c) => c.id === id);
+}

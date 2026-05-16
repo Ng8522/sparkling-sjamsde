@@ -1,39 +1,36 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart, X, Smartphone } from "lucide-react";
+import {
+  Phone,
+  Plus,
+  Ambulance,
+  Activity,
+  HeartPulse,
+  GraduationCap,
+  Droplets,
+  Truck,
+  LifeBuoy,
+  ArrowRight,
+  MapPin,
+  Clock,
+  Heart,
+  X,
+  Smartphone,
+  ZoomIn,
+} from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import ambulanceImg from "../assets/ambulance.jpg";
 import communityImg from "../assets/community.jpg";
 import mobileAppImg from "../assets/mobile-app.jpeg";
-
-
-const DONATE_URL = "#donate";
-
-const events = [
-  {
-    date: "15 JUN",
-    day: "Sat",
-    title: "Community Blood Donation Drive",
-    location: "Klang Parade, Klang",
-    time: "9:00 AM – 4:00 PM",
-    tag: "Blood Donation",
-  },
-  {
-    date: "22 JUN",
-    day: "Sat",
-    title: "Public First Aid & CPR Course",
-    location: "SJAM HQ, Selangor",
-    time: "8:30 AM – 5:00 PM",
-    tag: "Training",
-  },
-  {
-    date: "06 JUL",
-    day: "Sat",
-    title: "Mobile Clinic — Kg. Sungai Pinang",
-    location: "Klang District",
-    time: "10:00 AM – 3:00 PM",
-    tag: "Outreach",
-  },
-];
+import { StoreDownloadBadges } from "@/components/store-download-badges";
+import { EmergencyBanner, SiteHeader, StJohnCross } from "@/components/site-layout";
+import { portalEvents } from "@/lib/mock-data";
+import {
+  RAKAN_ST_JOHN_HOME_HIGHLIGHTS,
+  RAKAN_ST_JOHN_HOME_SUMMARY,
+  RAKAN_ST_JOHN_LOGO_URL,
+  RAKAN_ST_JOHN_TAGLINE,
+} from "@/lib/rakan-st-john";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -60,7 +57,7 @@ const services = [
   { icon: Ambulance, title: "24 Hr Ambulance", desc: "Rapid emergency evacuation and inter-hospital transfers with advanced life support.", tag: "Available Now", live: true, href: "tel:0333715005", cta: "03-3371 5005" },
   { icon: Truck, title: "Bariatric Ambulance", desc: "Specialised heavy-duty transport with bariatric lifting equipment.", tag: "On Request", href: "tel:0333715005", cta: "03-3371 5005" },
   { icon: Activity, title: "Haemodialysis", desc: "Subsidised dialysis treatment for community members with kidney conditions.", tag: "Klang Centre", href: "tel:0333735005", cta: "03-3373 5005" },
-  { icon: GraduationCap, title: "Public First Aid Classes", desc: "Accredited CPR and emergency trauma certification for individuals and corporates.", tag: "Monthly Intake", href: "mailto:user.selangor@sjam.org.my", cta: "Enquire" },
+  { icon: GraduationCap, title: "Public First Aid Classes", desc: "Accredited CPR and emergency trauma certification for individuals and corporates.", tag: "Monthly Intake", href: "/schedule", cta: "Book course", internal: true },
   { icon: HeartPulse, title: "Public Duty Standby", desc: "Trained medical standby for sporting events, concerts and public gatherings.", tag: "Book Ahead", href: "mailto:user.selangor@sjam.org.my", cta: "Request" },
 ];
 
@@ -70,22 +67,15 @@ const community = [
   { n: "03", icon: LifeBuoy, title: "Disaster Relief", desc: "Rapid deployment teams for flood response and large-scale emergency management." },
 ];
 
-function StJohnCross({ className = "" }: { className?: string }) {
-  return (
-    <div className={`grid place-items-center bg-primary text-primary-foreground rounded-md ${className}`}>
-      <Plus className="size-3/5" strokeWidth={2.5} />
-    </div>
-  );
-}
-
 function Index() {
   const [adOpen, setAdOpen] = useState(true);
+  const [appPreviewOpen, setAppPreviewOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
       {/* Floating Side Donate Button */}
-      <a
-        href={DONATE_URL}
+      <Link
+        to="/donate"
         aria-label="Donate to SJAM SDE"
         className="group fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-2 bg-gradient-to-b from-secondary to-primary text-primary-foreground py-5 px-2.5 rounded-l-xl shadow-2xl shadow-primary/30 hover:px-3.5 transition-all"
       >
@@ -94,7 +84,7 @@ function Index() {
           Donate Now
         </span>
         <span className="size-2 rounded-full bg-primary-foreground animate-pulse" />
-      </a>
+      </Link>
 
       {/* Fixed Dismissible Donation Ad */}
       {adOpen && (
@@ -126,64 +116,21 @@ function Index() {
               <p className="text-xs text-muted-foreground leading-snug">
                 Every contribution helps us serve the community.
               </p>
-              <a
-                href={DONATE_URL}
+              <Link
+                to="/donate"
                 onClick={() => setAdOpen(false)}
                 className="inline-flex items-center gap-1.5 h-9 px-4 bg-primary text-primary-foreground rounded-md font-medium text-sm hover:bg-secondary transition-colors shrink-0"
               >
                 Donate
                 <ArrowRight className="size-3.5" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Emergency Banner */}
-      <div className="bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
-          <div className="flex items-center gap-4">
-            <span className="relative flex size-2.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-primary-foreground/60 animate-ping" />
-              <span className="relative inline-flex rounded-full size-2.5 bg-primary-foreground" />
-            </span>
-            <span className="text-xs font-medium tracking-widest uppercase">24hr Emergency Hotline</span>
-            <a href="tel:0333715005" className="text-base font-semibold tabular-nums hover:underline">
-              03-3371 5005
-            </a>
-          </div>
-          <div className="hidden md:flex items-center gap-2 text-sm opacity-80">
-            <Phone className="size-3.5" />
-            <span>Haemodialysis: 03-3373 5005</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <header className="bg-background border-b border-border sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/85">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <StJohnCross className="size-10" />
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold">St John Ambulans Malaysia</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Selangor Darul Ehsan</span>
-            </div>
-          </Link>
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            <a href="#services" className="hover:text-primary transition-colors">Services</a>
-            <a href="#community" className="hover:text-primary transition-colors">Community</a>
-            <a href="#about" className="hover:text-primary transition-colors">About</a>
-            <a href="#events" className="hover:text-primary transition-colors">Events</a>
-            <a
-              href="#donate"
-              className="inline-flex items-center gap-1.5 h-9 px-4 bg-primary text-primary-foreground rounded-md hover:bg-secondary transition-colors"
-            >
-              <Plus className="size-4" strokeWidth={2.5} />
-              Donate
-            </a>
-          </nav>
-        </div>
-      </header>
+      <EmergencyBanner />
+      <SiteHeader />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
@@ -300,10 +247,17 @@ function Index() {
                       {s.tag}
                     </span>
                   </div>
-                  <a href={s.href} className="text-sm font-medium text-primary hover:text-secondary inline-flex items-center gap-1">
-                    {s.cta}
-                    <ArrowRight className="size-3.5" />
-                  </a>
+                  {"internal" in s && s.internal ? (
+                    <Link to={s.href} className="text-sm font-medium text-primary hover:text-secondary inline-flex items-center gap-1">
+                      {s.cta}
+                      <ArrowRight className="size-3.5" />
+                    </Link>
+                  ) : (
+                    <a href={s.href} className="text-sm font-medium text-primary hover:text-secondary inline-flex items-center gap-1">
+                      {s.cta}
+                      <ArrowRight className="size-3.5" />
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
@@ -323,9 +277,7 @@ function Index() {
             className="w-full max-w-md mx-auto aspect-[4/3] object-cover rounded-2xl ring-1 ring-border shadow-xl shadow-primary/10"
           />
           <div>
-            <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
-              Rakan St John · Community
-            </span>
+            <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">Community</span>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">For the people, by the people.</h2>
             <p className="text-muted-foreground mb-10 max-w-[48ch]">
               Beyond emergencies, our volunteers run programmes that bring care to where it's needed most.
@@ -348,6 +300,45 @@ function Index() {
             </div>
           </div>
         </div>
+
+        <div
+          id="rakan-st-john"
+          className="max-w-7xl mx-auto px-6 mt-20 pt-20 border-t border-border grid lg:grid-cols-[minmax(0,340px)_1fr] gap-12 lg:gap-16 items-center"
+        >
+          <div className="flex justify-center lg:justify-start">
+            <img
+              src={RAKAN_ST_JOHN_LOGO_URL}
+              alt="Rakan St John logo"
+              width={320}
+              height={320}
+              loading="lazy"
+              className="w-full max-w-[280px] md:max-w-[320px] h-auto object-contain drop-shadow-md"
+            />
+          </div>
+          <div>
+            <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase block mb-3">
+              Community programme
+            </span>
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight mb-3">Rakan St John</h3>
+            <p className="text-lg text-muted-foreground font-medium mb-5 max-w-[48ch]">{RAKAN_ST_JOHN_TAGLINE}</p>
+            <p className="text-muted-foreground leading-relaxed max-w-[56ch] mb-6">{RAKAN_ST_JOHN_HOME_SUMMARY}</p>
+            <ul className="space-y-3 mb-8 max-w-[56ch]">
+              {RAKAN_ST_JOHN_HOME_HIGHLIGHTS.map((item) => (
+                <li key={item} className="flex gap-3 text-sm text-muted-foreground">
+                  <span className="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/volunteer"
+              className="inline-flex items-center gap-2 h-11 px-6 bg-primary text-primary-foreground rounded-md font-medium text-sm hover:bg-secondary transition-colors"
+            >
+              Register online
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Events */}
@@ -362,21 +353,21 @@ function Index() {
                 Join us at our next community event.
               </h2>
             </div>
-            <a
-              href="#events"
+            <Link
+              to="/schedule"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary self-start md:self-auto"
             >
               View all events
               <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
-            {events.map((e) => {
+            {portalEvents.map((e) => {
               const [day, month] = e.date.split(" ");
               return (
                 <article
-                  key={e.title}
+                  key={e.id}
                   className="group bg-card rounded-xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col"
                 >
                   <div className="flex items-stretch border-b border-border">
@@ -405,13 +396,14 @@ function Index() {
                         <span>{e.time}</span>
                       </div>
                     </div>
-                    <a
-                      href="#events"
+                    <Link
+                      to="/events/$eventId"
+                      params={{ eventId: e.id }}
                       className="mt-auto inline-flex items-center justify-between text-sm font-medium text-primary border-t border-border pt-4 hover:text-secondary"
                     >
                       Register / Details
                       <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
-                    </a>
+                    </Link>
                   </div>
                 </article>
               );
@@ -426,76 +418,49 @@ function Index() {
           <div className="order-2 md:order-1">
             <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
               <Smartphone className="size-3.5" />
-              SSMP Mobile App · Members Only
+              SSMP app · download only
             </span>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
-              Are you one of our members?{" "}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Open the app for the latest event notifications.
-              </span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">Already a SJAM member?</h2>
             <p className="text-muted-foreground max-w-[48ch] mb-8 leading-relaxed">
-              The SSMP Mobile App is the official members portal for SJAM SDE — manage your duties, events, achievements and stay connected on the go.
+              Member registration, duty hours, SOS and internal announcements are in the SSMP mobile app — not on this public website.
             </p>
-            <div className="grid sm:grid-cols-2 gap-x-5 gap-y-3 mb-10">
-              {[
-                "Member registration & activation",
-                "Event calendar & management",
-                "Duty hour tracking",
-                "Member achievements",
-                "Newsletter & announcements",
-                "SOS emergency alert",
-                "Role-based access (Admin / Exco)",
-                "Real-time push notifications",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="size-5 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0">
-                    <Plus className="size-3" strokeWidth={3} />
-                  </span>
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="https://apps.apple.com/my/app/sjam-sde"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded-lg transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}app-store-badge.svg`}
-                  alt="Download on the App Store"
-                  width={156}
-                  height={48}
-                  className="h-12 w-auto"
-                />
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=my.org.sjamsde.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded-lg transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}google-play-badge.svg`}
-                  alt="Get it on Google Play"
-                  width={156}
-                  height={48}
-                  className="h-12 w-auto"
-                />
-              </a>
-            </div>
+            <StoreDownloadBadges className="[&_img]:h-12" />
           </div>
-          <div className="order-1 md:order-2 relative flex justify-center">
-            <img
-              src={mobileAppImg}
-              alt="SJAM SDE mobile app preview on smartphone"
-              width={1024}
-              height={1024}
-              loading="lazy"
-              className="w-full max-w-sm aspect-square object-cover rounded-2xl ring-1 ring-border shadow-2xl shadow-primary/10"
-            />
+          <div className="order-1 md:order-2 relative flex flex-col items-center">
+            <button
+              type="button"
+              onClick={() => setAppPreviewOpen(true)}
+              className="group relative w-full max-w-sm rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-label="Zoom in mobile app preview"
+            >
+              <img
+                src={mobileAppImg}
+                alt="SJAM SDE mobile app preview on smartphone"
+                width={1024}
+                height={1024}
+                loading="lazy"
+                className="w-full aspect-square object-cover rounded-2xl ring-1 ring-border shadow-2xl shadow-primary/10 transition-transform duration-200 group-hover:scale-[1.02]"
+              />
+              <span className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/0 transition-colors group-hover:bg-black/25">
+                <span className="flex items-center gap-2 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                  <ZoomIn className="size-4 text-primary" />
+                  Click to enlarge
+                </span>
+              </span>
+            </button>
+            <p className="mt-3 text-xs text-muted-foreground">Tap image to zoom</p>
+            <Dialog open={appPreviewOpen} onOpenChange={setAppPreviewOpen}>
+              <DialogContent className="max-w-[min(96vw,42rem)] border-border p-2 sm:p-3 gap-0">
+                <DialogTitle className="sr-only">SJAM SDE mobile app preview</DialogTitle>
+                <img
+                  src={mobileAppImg}
+                  alt="SJAM SDE mobile app preview — enlarged"
+                  width={1024}
+                  height={1024}
+                  className="w-full max-h-[min(85vh,42rem)] object-contain rounded-lg"
+                />
+              </DialogContent>
+            </Dialog>
             <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
               <span className="relative flex size-2.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-secondary/60 animate-ping" />
@@ -518,13 +483,13 @@ function Index() {
             <p className="opacity-90 mb-8 text-lg">
               Your donation maintains our ambulance fleet and subsidises dialysis treatment for low-income patients.
             </p>
-            <a
-              href="https://sde.sjamsde.org.my/"
+            <Link
+              to="/donate"
               className="inline-flex items-center gap-2 h-12 px-7 bg-background text-primary font-semibold rounded-md hover:bg-card transition-colors shadow-lg"
             >
               <Plus className="size-4" strokeWidth={2.8} />
               Make a Secure Donation
-            </a>
+            </Link>
           </div>
           <div className="absolute -right-16 -bottom-20 opacity-[0.08] pointer-events-none">
             <Plus className="size-[28rem]" strokeWidth={1.5} />
@@ -544,7 +509,7 @@ function Index() {
               <p className="text-sm text-muted-foreground max-w-[42ch] mb-6 leading-relaxed">
                 A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public. SJAM SDE has served Selangor since 1990, under SJAM Malaysia (est. 1908).
               </p>
-              <div className="space-y-1.5 text-sm text-muted-foreground">
+              <div className="space-y-1.5 text-sm text-muted-foreground mb-6">
                 <p>Selangor Darul Ehsan, Malaysia</p>
                 <p>
                   Email:{" "}
@@ -553,6 +518,8 @@ function Index() {
                   </a>
                 </p>
               </div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">SSMP mobile app</p>
+              <StoreDownloadBadges />
             </div>
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Explore</h4>
