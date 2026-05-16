@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart, X } from "lucide-react";
-import ambulanceImg from "@/assets/ambulance.jpg";
-import communityImg from "@/assets/community.jpg";
+import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart, X, Smartphone } from "lucide-react";
+import ambulanceImg from "../assets/ambulance.jpg";
+import communityImg from "../assets/community.jpg";
 
 const DONATE_URL = "#donate";
 
@@ -414,6 +414,93 @@ function Index() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile App */}
+      <section id="app" className="py-24">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="order-2 md:order-1">
+            <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
+              <Smartphone className="size-3.5" />
+              SSMP Mobile App · Members Only
+            </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
+              Are you one of our members?{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Open the app for the latest event notifications.
+              </span>
+            </h2>
+            <p className="text-muted-foreground max-w-[48ch] mb-8 leading-relaxed">
+              The SSMP Mobile App is the official members portal for SJAM SDE — manage your duties, events, achievements and stay connected on the go.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-x-5 gap-y-3 mb-10">
+              {[
+                "Member registration & activation",
+                "Event calendar & management",
+                "Duty hour tracking",
+                "Member achievements",
+                "Newsletter & announcements",
+                "SOS emergency alert",
+                "Role-based access (Admin / Exco)",
+                "Real-time push notifications",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <span className="size-5 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0">
+                    <Plus className="size-3" strokeWidth={3} />
+                  </span>
+                  {item}
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://apps.apple.com/my/app/sjam-sde"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 h-12 px-5 bg-card text-foreground font-medium rounded-xl border border-border hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all"
+              >
+                <svg viewBox="0 0 24 24" className="size-6" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.03 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                <div className="flex flex-col leading-none">
+                  <span className="text-[9px] text-muted-foreground">Download on the</span>
+                  <span className="text-sm font-semibold">App Store</span>
+                </div>
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=my.org.sjamsde.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 h-12 px-5 bg-card text-foreground font-medium rounded-xl border border-border hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all"
+              >
+                <svg viewBox="0 0 24 24" className="size-6" fill="currentColor">
+                  <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31zM6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z" />
+                </svg>
+                <div className="flex flex-col leading-none">
+                  <span className="text-[9px] text-muted-foreground">Get it on</span>
+                  <span className="text-sm font-semibold">Google Play</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className="order-1 md:order-2 relative flex justify-center">
+            {/* <img
+              src={appMockupImg}
+              alt="SJAM SDE mobile app preview on smartphone"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="w-full max-w-sm aspect-square object-cover rounded-2xl ring-1 ring-border shadow-2xl shadow-primary/10"
+            /> */}
+            <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
+              <span className="relative flex size-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-secondary/60 animate-ping" />
+                <span className="relative inline-flex rounded-full size-2.5 bg-secondary" />
+              </span>
+              <span className="text-xs font-medium">Coming Soon</span>
+            </div>
           </div>
         </div>
       </section>
