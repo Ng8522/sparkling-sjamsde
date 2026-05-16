@@ -36,16 +36,17 @@ export function EmergencyBanner() {
   );
 }
 
-const navLinks: { label: string; to: "/" | "/schedule" | "/volunteer" }[] = [
+const navLinks: { label: string; to: "/" | "/events" | "/courses" | "/volunteer" }[] = [
   { label: "Home", to: "/" },
-  { label: "Events & Courses", to: "/schedule" },
+  { label: "Events", to: "/events" },
+  { label: "Courses", to: "/courses" },
   { label: "Rakan St John", to: "/volunteer" },
 ];
 
 function isNavActive(pathname: string, to: (typeof navLinks)[number]["to"]) {
   if (to === "/") return pathname === "/";
-  if (to === "/schedule") return pathname === "/schedule" || pathname === "/events" || pathname === "/courses";
-  return pathname === to;
+  if (to === "/events") return pathname === "/events" || pathname.startsWith("/events/");
+  return pathname === to || (to === "/courses" && pathname === "/schedule");
 }
 
 export function SiteHeader() {
@@ -118,8 +119,13 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link to="/schedule" className="hover:text-primary">
-                  Events & courses calendar
+                <Link to="/events" className="hover:text-primary">
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses" className="hover:text-primary">
+                  Courses
                 </Link>
               </li>
               <li>

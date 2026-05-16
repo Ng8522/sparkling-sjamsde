@@ -24,7 +24,7 @@ function EventDetailPage() {
         <div className="max-w-7xl mx-auto px-6 py-20 text-center">
           <h1 className="text-2xl font-semibold">Event not found</h1>
           <Button asChild className="mt-6">
-            <Link to="/schedule">Back to calendar</Link>
+            <Link to="/events">Back to events</Link>
           </Button>
         </div>
       </SiteLayout>
@@ -40,7 +40,7 @@ function EventDetailPage() {
             description={`Confirmation for "${event.title}" would be emailed in production. Push notifications are for SSMP members in the mobile app only.`}
           >
             <Button asChild variant="outline">
-              <Link to="/schedule">Back to calendar</Link>
+              <Link to="/events">Back to events</Link>
             </Button>
           </MockSuccess>
         </section>
@@ -53,9 +53,9 @@ function EventDetailPage() {
   return (
     <SiteLayout>
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <Link to="/schedule" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
+        <Link to="/events" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
           <ArrowLeft className="size-4" />
-          Back to calendar
+          Back to events
         </Link>
 
         <div className="flex gap-4 items-start mb-6">

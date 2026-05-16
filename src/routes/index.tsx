@@ -57,7 +57,7 @@ const services = [
   { icon: Ambulance, title: "24 Hr Ambulance", desc: "Rapid emergency evacuation and inter-hospital transfers with advanced life support.", tag: "Available Now", live: true, href: "tel:0333715005", cta: "03-3371 5005" },
   { icon: Truck, title: "Bariatric Ambulance", desc: "Specialised heavy-duty transport with bariatric lifting equipment.", tag: "On Request", href: "tel:0333715005", cta: "03-3371 5005" },
   { icon: Activity, title: "Haemodialysis", desc: "Subsidised dialysis treatment for community members with kidney conditions.", tag: "Klang Centre", href: "tel:0333735005", cta: "03-3373 5005" },
-  { icon: GraduationCap, title: "Public First Aid Classes", desc: "Accredited CPR and emergency trauma certification for individuals and corporates.", tag: "Monthly Intake", href: "/schedule", cta: "Book course", internal: true },
+  { icon: GraduationCap, title: "Public First Aid Classes", desc: "Accredited CPR and emergency trauma certification for individuals and corporates.", tag: "Monthly Intake", href: "/courses", cta: "Book course", internal: true },
   { icon: HeartPulse, title: "Public Duty Standby", desc: "Trained medical standby for sporting events, concerts and public gatherings.", tag: "Book Ahead", href: "mailto:user.selangor@sjam.org.my", cta: "Request" },
 ];
 
@@ -353,13 +353,22 @@ function Index() {
                 Join us at our next community event.
               </h2>
             </div>
-            <Link
-              to="/schedule"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary self-start md:self-auto"
-            >
-              View all events
-              <ArrowRight className="size-4" />
-            </Link>
+            <div className="flex flex-wrap gap-4 self-start md:self-auto">
+              <Link
+                to="/events"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary"
+              >
+                All events
+                <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/courses"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
+              >
+                Training courses
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
