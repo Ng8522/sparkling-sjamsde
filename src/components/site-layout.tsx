@@ -3,6 +3,7 @@ import { CheckCircle2, Phone, Plus } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { StoreDownloadBadges } from "@/components/store-download-badges";
+import { SITE_CONTACT_EMAIL, SITE_FOOTER_INTRO } from "@/lib/site-footer-content";
 import { cn } from "@/lib/utils";
 
 export function StJohnCross({ className = "" }: { className?: string }) {
@@ -94,25 +95,43 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ id }: { id?: string }) {
   return (
-    <footer className="bg-muted/50 border-t border-border pt-16 pb-10 mt-auto">
+    <footer id={id} className="bg-muted/50 border-t border-border pt-20 pb-10 mt-auto">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-[1.5fr_1fr_1fr] gap-12 pb-12 border-b border-border">
+        <div className="grid lg:grid-cols-[1.5fr_1fr_1fr] gap-12 pb-16 border-b border-border">
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-5">
               <StJohnCross className="size-9" />
               <span className="font-semibold">SJAM Selangor</span>
             </div>
-            <p className="text-sm text-muted-foreground max-w-[42ch] leading-relaxed mb-5">
-              Digital humanitarian service platform mock-up — web portal per SJAM SDE 2026 assessment.
-            </p>
+            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed mb-6 max-w-[52ch]">
+              {SITE_FOOTER_INTRO.map((line) => {
+                const [label, ...rest] = line.split(" — ");
+                const body = rest.join(" — ");
+                return (
+                  <p key={line}>
+                    <span className="font-medium text-foreground">{label}</span>
+                    {body ? <> — {body}</> : null}
+                  </p>
+                );
+              })}
+            </div>
+            <div className="space-y-1.5 text-sm text-muted-foreground mb-6">
+              <p>Selangor Darul Ehsan, Malaysia</p>
+              <p>
+                Email:{" "}
+                <a href={`mailto:${SITE_CONTACT_EMAIL}`} className="text-primary hover:underline">
+                  {SITE_CONTACT_EMAIL}
+                </a>
+              </p>
+            </div>
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">SSMP mobile app</p>
             <StoreDownloadBadges />
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Portal</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Explore</h4>
+            <ul className="space-y-3 text-sm">
               <li>
                 <Link to="/donate" className="hover:text-primary">
                   Donate
@@ -133,19 +152,35 @@ export function SiteFooter() {
                   Rakan St John
                 </Link>
               </li>
+              <li>
+                <Link to="/" hash="services" className="hover:text-primary">
+                  Services
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Hotlines</h4>
-            <p className="text-xs text-muted-foreground mb-1">Ambulance · 24/7</p>
-            <a href="tel:0333715005" className="text-lg font-semibold tabular-nums text-primary">
-              03-3371 5005
-            </a>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Hotlines</h4>
+            <div className="space-y-5">
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Ambulance · 24/7</p>
+                <a href="tel:0333715005" className="text-lg font-semibold tabular-nums text-primary hover:text-secondary">
+                  03-3371 5005
+                </a>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Haemodialysis Centre</p>
+                <a href="tel:0333735005" className="text-lg font-semibold tabular-nums text-primary hover:text-secondary">
+                  03-3373 5005
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <p className="pt-8 text-xs text-muted-foreground text-center">
-          © {new Date().getFullYear()} St John Ambulans Malaysia, Selangor. Mock-up demo.
-        </p>
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} St John Ambulans Malaysia, Selangor Darul Ehsan. All rights reserved.</p>
+          <p className="font-medium tracking-wider uppercase">Pro Utilitate Hominum</p>
+        </div>
       </div>
     </footer>
   );

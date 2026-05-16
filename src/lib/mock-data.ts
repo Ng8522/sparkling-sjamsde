@@ -178,27 +178,6 @@ export const courses: Course[] = [
   },
 ];
 
-export const donationCampaigns = [
-  {
-    id: "ambulance",
-    title: "Ambulance Fleet Maintenance",
-    goal: 250000,
-    raised: 142500,
-  },
-  {
-    id: "dialysis",
-    title: "Subsidised Haemodialysis Fund",
-    goal: 180000,
-    raised: 96800,
-  },
-  {
-    id: "training",
-    title: "Youth First Aid Scholarship",
-    goal: 50000,
-    raised: 31200,
-  },
-];
-
 export function getEventById(id: string) {
   return portalEvents.find((e) => e.id === id);
 }

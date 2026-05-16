@@ -7,6 +7,7 @@ import {
   Activity,
   HeartPulse,
   GraduationCap,
+  HeartHandshake,
   Droplets,
   Truck,
   LifeBuoy,
@@ -23,7 +24,7 @@ import ambulanceImg from "../assets/ambulance.jpg";
 import communityImg from "../assets/community.jpg";
 import mobileAppImg from "../assets/mobile-app.jpeg";
 import { StoreDownloadBadges } from "@/components/store-download-badges";
-import { EmergencyBanner, SiteHeader, StJohnCross } from "@/components/site-layout";
+import { EmergencyBanner, SiteFooter, SiteHeader } from "@/components/site-layout";
 import { portalEvents } from "@/lib/mock-data";
 import {
   RAKAN_ST_JOHN_HOME_HIGHLIGHTS,
@@ -55,16 +56,16 @@ export const Route = createFileRoute("/")({
 
 const services = [
   { icon: Ambulance, title: "24 Hr Ambulance", desc: "Rapid emergency evacuation and inter-hospital transfers with advanced life support.", tag: "Available Now", live: true, href: "tel:0333715005", cta: "03-3371 5005" },
-  { icon: Truck, title: "Bariatric Ambulance", desc: "Specialised heavy-duty transport with bariatric lifting equipment.", tag: "On Request", href: "tel:0333715005", cta: "03-3371 5005" },
-  { icon: Activity, title: "Haemodialysis", desc: "Subsidised dialysis treatment for community members with kidney conditions.", tag: "Klang Centre", href: "tel:0333735005", cta: "03-3373 5005" },
+  { icon: HeartPulse, title: "Public Duty StandBy", desc: "Trained medical standby for sporting events, concerts and public gatherings.", tag: "Book Ahead", href: "mailto:user.selangor@sjam.org.my", cta: "Request" },
+  { icon: Activity, title: "Haemodialysis Service", desc: "Subsidised dialysis treatment for community members with kidney conditions.", tag: "Klang Centre", href: "tel:0333735005", cta: "03-3373 5005" },
   { icon: GraduationCap, title: "Public First Aid Classes", desc: "Accredited CPR and emergency trauma certification for individuals and corporates.", tag: "Monthly Intake", href: "/courses", cta: "Book course", internal: true },
-  { icon: HeartPulse, title: "Public Duty Standby", desc: "Trained medical standby for sporting events, concerts and public gatherings.", tag: "Book Ahead", href: "mailto:user.selangor@sjam.org.my", cta: "Request" },
 ];
 
 const community = [
-  { n: "01", icon: Droplets, title: "Blood Donation Drives", desc: "Regular drives across Selangor to support the national blood bank reserves." },
-  { n: "02", icon: Truck, title: "Mobile Clinic", desc: "Bringing basic medical consultation and health screenings to underserved areas." },
-  { n: "03", icon: LifeBuoy, title: "Disaster Relief", desc: "Rapid deployment teams for flood response and large-scale emergency management." },
+  { n: "01", icon: HeartHandshake, title: "Fundraising", desc: "Public appeals and campaigns that sustain ambulance operations, dialysis subsidies and community programmes.", href: "/donate" as const },
+  { n: "02", icon: Droplets, title: "Blood Donation Drives", desc: "Regular drives across Selangor to support the national blood bank reserves." },
+  { n: "03", icon: Truck, title: "Mobile Clinic", desc: "Bringing basic medical consultation and health screenings to underserved areas." },
+  { n: "04", icon: LifeBuoy, title: "Disaster Relief", desc: "Rapid deployment teams for flood response and large-scale emergency management." },
 ];
 
 function Index() {
@@ -229,7 +230,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 gap-5">
             {services.map((s) => (
               <article
                 key={s.title}
@@ -506,63 +507,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="about" className="bg-muted/50 border-t border-border pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-[1.5fr_1fr_1fr] gap-12 pb-16 border-b border-border">
-            <div>
-              <div className="flex items-center gap-3 mb-5">
-                <StJohnCross className="size-9" />
-                <span className="font-semibold">SJAM Selangor</span>
-              </div>
-              <p className="text-sm text-muted-foreground max-w-[42ch] mb-6 leading-relaxed">
-                A non-profit humanitarian organisation providing first aid, nursing and ambulance services to the public. SJAM SDE has served Selangor since 1990, under SJAM Malaysia (est. 1908).
-              </p>
-              <div className="space-y-1.5 text-sm text-muted-foreground mb-6">
-                <p>Selangor Darul Ehsan, Malaysia</p>
-                <p>
-                  Email:{" "}
-                  <a href="mailto:user.selangor@sjam.org.my" className="text-primary hover:underline">
-                    user.selangor@sjam.org.my
-                  </a>
-                </p>
-              </div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">SSMP mobile app</p>
-              <StoreDownloadBadges />
-            </div>
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Explore</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a href="#services" className="hover:text-primary">Services</a></li>
-                <li><a href="#community" className="hover:text-primary">Community Programs</a></li>
-                <li><a href="#about" className="hover:text-primary">About SJAM</a></li>
-                <li><a href="#donate" className="hover:text-primary">Donate</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Hotlines</h4>
-              <div className="space-y-5">
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Ambulance · 24/7</p>
-                  <a href="tel:0333715005" className="text-lg font-semibold tabular-nums text-primary hover:text-secondary">
-                    03-3371 5005
-                  </a>
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Haemodialysis Centre</p>
-                  <a href="tel:0333735005" className="text-lg font-semibold tabular-nums text-primary hover:text-secondary">
-                    03-3373 5005
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-            <p>© {new Date().getFullYear()} St John Ambulans Malaysia, Selangor Darul Ehsan. All rights reserved.</p>
-            <p className="font-medium tracking-wider uppercase">Pro Utilitate Hominum</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter id="about" />
     </div>
   );
 }

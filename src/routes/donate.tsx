@@ -4,16 +4,23 @@ import { CreditCard, Heart, RefreshCw, Smartphone } from "lucide-react";
 
 import { MockSuccess, SiteLayout } from "@/components/site-layout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { donationCampaigns } from "@/lib/mock-data";
+import { DONATE_PAGE_INTRO } from "@/lib/site-footer-content";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/donate")({
   component: DonatePage,
   head: () => ({
-    meta: [{ title: "Donate — SJAM Selangor" }, { name: "description", content: "Support ambulance, dialysis and training programmes." }],
+    meta: [
+      { title: "Donate — SJAM Selangor" },
+      {
+        name: "description",
+        content:
+          "Support St John Ambulance Selangor Darul Ehsan. Tax-exempt donations help fund community medical and humanitarian services.",
+      },
+    ],
   }),
 });
 
@@ -30,7 +37,6 @@ function DonatePage() {
   const [customAmount, setCustomAmount] = useState("");
   const [recurring, setRecurring] = useState(false);
   const [method, setMethod] = useState<(typeof methods)[number]["id"]>("fpx");
-  const [campaign, setCampaign] = useState(donationCampaigns[0].id);
 
   const finalAmount = customAmount ? Number(customAmount) : amount;
 
@@ -45,7 +51,7 @@ function DonatePage() {
         <section className="max-w-7xl mx-auto px-6 py-16">
           <MockSuccess
             title="Thank you for your generosity"
-            description={`Mock receipt #SJAM-${Date.now().toString().slice(-6)} — RM ${finalAmount}${recurring ? " / month" : ""} via ${method.toUpperCase()}. Tax receipt would be emailed in production.`}
+            description={` receipt #SJAM-${Date.now().toString().slice(-6)} — RM ${finalAmount}${recurring ? " / month" : ""} via ${method.toUpperCase()}. Tax receipt would be emailed in production.`}
           >
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild variant="outline">
@@ -64,53 +70,21 @@ function DonatePage() {
   return (
     <SiteLayout>
       <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-14">
-          <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase">Donation platform · Mock</span>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mt-3 max-w-2xl">
-            Fuel life-saving work with your generosity.
+        <div className="max-w-3xl mx-auto px-6 py-14 md:py-16">
+          <span className="text-primary font-semibold text-xs tracking-[0.2em] uppercase">Donate</span>
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mt-3 text-balance">
+            Your kind support goes further with us
           </h1>
-          <p className="text-muted-foreground mt-4 max-w-xl">
-            FPX, DuitNow, cards, recurring gifts and campaign tracking — simulated for stakeholder review.
-          </p>
+          <div className="mt-8 space-y-5 text-muted-foreground leading-relaxed">
+            {DONATE_PAGE_INTRO.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-[1fr_340px] gap-10">
         <form onSubmit={handleSubmit} className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Choose a campaign</CardTitle>
-              <CardDescription>Track impact by programme (mock progress).</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {donationCampaigns.map((c) => {
-                const pct = Math.round((c.raised / c.goal) * 100);
-                return (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => setCampaign(c.id)}
-                    className={cn(
-                      "w-full text-left rounded-lg border p-4 transition-colors",
-                      campaign === c.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/40",
-                    )}
-                  >
-                    <div className="flex justify-between text-sm font-medium mb-2">
-                      <span>{c.title}</span>
-                      <span className="text-muted-foreground">{pct}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-muted overflow-hidden">
-                      <div className="h-full bg-primary rounded-full" style={{ width: `${pct}%` }} />
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      RM {c.raised.toLocaleString()} raised of RM {c.goal.toLocaleString()}
-                    </p>
-                  </button>
-                );
-              })}
-            </CardContent>
-          </Card>
-
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Amount</CardTitle>
@@ -144,7 +118,12 @@ function DonatePage() {
                 />
               </div>
               <label className="flex items-center gap-2 text-sm cursor-pointer">
-                <input type="checkbox" checked={recurring} onChange={(e) => setRecurring(e.target.checked)} className="rounded border-input" />
+                <input
+                  type="checkbox"
+                  checked={recurring}
+                  onChange={(e) => setRecurring(e.target.checked)}
+                  className="rounded border-input"
+                />
                 <RefreshCw className="size-4 text-primary" />
                 Monthly recurring donation
               </label>
@@ -195,24 +174,30 @@ function DonatePage() {
 
           <Button type="submit" size="lg" className="w-full sm:w-auto gap-2">
             <Heart className="size-4" />
-            Complete mock payment · RM {finalAmount || "—"}
+            Complete payment
           </Button>
         </form>
 
         <aside className="space-y-4">
+          <Card className="border-primary/20 bg-primary/5">
+            <CardContent className="pt-6">
+              <p className="text-sm font-semibold text-foreground mb-2">Income tax exemption</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Donations to SJAM Selangor Darul Ehsan are exempted from Income Tax vide Federal
+                Government Gazette L.N.334 dated 22nd June 1955.
+              </p>
+            </CardContent>
+          </Card>
           <Card className="bg-primary text-primary-foreground border-0">
             <CardContent className="pt-6">
               <p className="text-sm opacity-90 mb-2">Your gift supports</p>
               <ul className="text-sm space-y-2 opacity-95">
                 <li>· 24-hour ambulance fleet</li>
                 <li>· Subsidised haemodialysis</li>
-                <li>· Community training & outreach</li>
+                <li>· Community training &amp; outreach</li>
               </ul>
             </CardContent>
           </Card>
-          <p className="text-xs text-muted-foreground">
-            Production: iPay88 / FPX integration, donor CRM, automated tax receipts (per assessment §7).
-          </p>
         </aside>
       </div>
     </SiteLayout>
