@@ -425,29 +425,36 @@ function Index() {
           <div className="order-2 lg:order-1">
             <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
               <Smartphone className="size-3.5" />
-              SJAM SDE Mobile App
+              SSMP Mobile App · Members Only
             </span>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-5">
-              Help is now in your pocket.
+              Are you one of our members?{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Open the app for the latest event notifications.
+              </span>
             </h2>
             <p className="text-muted-foreground max-w-[48ch] mb-8 leading-relaxed">
-              Request ambulance, book dialysis appointments, register for first aid courses, and get emergency tips — all from your phone.
+              The SSMP Mobile App is the official members portal for SJAM SDE — manage your duties, events, achievements and stay connected on the go.
             </p>
-            <ul className="space-y-4 mb-10">
+            <div className="grid sm:grid-cols-2 gap-x-5 gap-y-3 mb-10">
               {[
-                "One-tap ambulance emergency call",
-                "Dialysis appointment booking",
-                "First aid & CPR course registration",
-                "Community event notifications",
+                "Member registration & activation",
+                "Event calendar & management",
+                "Duty hour tracking",
+                "Member achievements",
+                "Newsletter & announcements",
+                "SOS emergency alert",
+                "Role-based access (Admin / Exco)",
+                "Real-time push notifications",
               ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
+                <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="size-5 rounded-full bg-primary/10 text-primary grid place-items-center shrink-0">
                     <Plus className="size-3" strokeWidth={3} />
                   </span>
                   {item}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
             <div className="flex flex-wrap gap-3">
               <a
                 href="https://apps.apple.com/my/app/sjam-sde"
