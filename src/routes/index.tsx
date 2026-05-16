@@ -421,8 +421,8 @@ function Index() {
 
       {/* Mobile App */}
       <section id="app" className="py-24">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="order-2 lg:order-1">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="order-2 md:order-1">
             <span className="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-[0.2em] uppercase mb-5 bg-primary/10 px-3 py-1.5 rounded-full">
               <Smartphone className="size-3.5" />
               SSMP Mobile App · Members Only
@@ -486,7 +486,7 @@ function Index() {
               </a>
             </div>
           </div>
-          <div className="order-1 lg:order-2 relative flex justify-center">
+          <div className="order-1 md:order-2 relative flex justify-center">
             <img
               src={appMockupImg}
               alt="SJAM SDE mobile app preview on smartphone"
