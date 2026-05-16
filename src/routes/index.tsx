@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart, X } from "lucide-react";
+import { Phone, Plus, Ambulance, Activity, HeartPulse, GraduationCap, Droplets, Truck, LifeBuoy, ArrowRight, MapPin, Clock, Heart, X, Smartphone } from "lucide-react";
 import ambulanceImg from "@/assets/ambulance.jpg";
 import communityImg from "@/assets/community.jpg";
+import appMockupImg from "@/assets/app-mockup.jpg";
 
 const DONATE_URL = "#donate";
 
