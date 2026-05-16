@@ -5,10 +5,7 @@ import {
   createRootRouteWithContext,
   useRouter,
   HeadContent,
-  Scripts,
-} from "@tanstack/react-start";
-
-import appCss from "../styles.css?url";
+} from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -85,38 +82,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/28ba3d3b-abc0-4d5e-846d-5f409819f3dd/id-preview-a7a65062--63469941-86b0-455a-a8df-691faa0dacbc.lovable.app-1778921231853.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/28ba3d3b-abc0-4d5e-846d-5f409819f3dd/id-preview-a7a65062--63469941-86b0-455a-a8df-691faa0dacbc.lovable.app-1778921231853.png" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <Outlet />
     </QueryClientProvider>
   );
