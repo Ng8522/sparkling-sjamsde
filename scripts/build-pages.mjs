@@ -7,11 +7,11 @@ const env = {
   VITE_BASE_PATH: base.replace(/\/$/, ""),
 };
 
-const build = spawnSync("pnpm", ["run", "build"], {
-  stdio: "inherit",
-  env,
-  shell: true,
-});
+const build = spawnSync(
+  "pnpm",
+  ["exec", "vite", "build", "--config", "vite.pages.config.ts"],
+  { stdio: "inherit", env, shell: true },
+);
 if (build.status !== 0) process.exit(build.status ?? 1);
 
 const prepare = spawnSync("node", ["scripts/prepare-github-pages.mjs"], {
