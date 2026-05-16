@@ -1,16 +1,16 @@
 {
   "name": "tanstack_start_ts",
   "private": true,
-  "sideEffects": false,
+  "sideEffects": ["**/*.css", "./src/styles.css"],
   "type": "module",
   "homepage": "https://ng8522.github.io/sparkling-sjamsde",
   "scripts": {
-    "dev": "vinxi dev",
+    "dev": "node scripts/dev.mjs",
     "build": "vinxi build",
     "build:pages": "node scripts/build-pages.mjs",
     "start": "vinxi start",
     "predeploy": "pnpm run build:pages",
-    "deploy": "gh-pages -d .output/public"
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",

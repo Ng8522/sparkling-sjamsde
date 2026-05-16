@@ -1,4 +1,10 @@
 import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { resolvePackageBin } from "./resolve-package-bin.mjs";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const viteBin = resolvePackageBin(root, "vite");
 
 const base = "/sparkling-sjamsde/";
 const env = {
@@ -8,15 +14,15 @@ const env = {
 };
 
 const build = spawnSync(
-  "pnpm",
-  ["exec", "vite", "build", "--config", "vite.pages.config.ts"],
-  { stdio: "inherit", env, shell: true },
+  process.execPath,
+  [viteBin, "build", "--config", "vite.pages.config.ts"],
+  { stdio: "inherit", env, cwd: root },
 );
 if (build.status !== 0) process.exit(build.status ?? 1);
 
-const prepare = spawnSync("node", ["scripts/prepare-github-pages.mjs"], {
-  stdio: "inherit",
-  env,
-  shell: true,
-});
+const prepare = spawnSync(
+  process.execPath,
+  ["scripts/prepare-github-pages.mjs"],
+  { stdio: "inherit", env, cwd: root },
+);
 process.exit(prepare.status ?? 1);
