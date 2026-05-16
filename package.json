@@ -6,8 +6,9 @@
   "homepage": "https://ng8522.github.io/sparkling-sjamsde",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "vinxi build",
+    "build": "node scripts/build-pages.mjs",
     "build:pages": "node scripts/build-pages.mjs",
+    "build:vinxi": "vinxi build",
     "start": "vinxi start",
     "predeploy": "pnpm run build:pages",
     "deploy": "node scripts/deploy.mjs"

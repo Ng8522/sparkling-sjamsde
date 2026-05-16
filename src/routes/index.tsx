@@ -363,6 +363,13 @@ function Index() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
+                to="/gallery"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
+              >
+                Past event gallery
+                <ArrowRight className="size-4" />
+              </Link>
+              <Link
                 to="/courses"
                 className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
               >

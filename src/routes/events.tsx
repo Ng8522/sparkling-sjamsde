@@ -30,12 +30,15 @@ function EventsPage() {
             Blood drives, outreach clinics and one-day activities. Pick a date to see what is on, then register for an
             event.
           </p>
-          <p className="text-sm text-muted-foreground mt-3">
-            Looking for multi-session training?{" "}
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground mt-3">
+            <Link to="/gallery" className="text-primary font-medium hover:underline">
+              Past event gallery
+            </Link>
+            <span className="hidden sm:inline text-border">·</span>
             <Link to="/courses" className="text-primary font-medium hover:underline">
               View courses
             </Link>
-          </p>
+          </div>
         </div>
       </section>
 

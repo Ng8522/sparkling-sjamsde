@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsEventIdRouteImport } from './routes/events.$eventId'
 
@@ -25,6 +27,11 @@ const VolunteerRoute = VolunteerRouteImport.update({
 const ScheduleRoute = ScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -42,6 +49,11 @@ const CoursesRoute = CoursesRouteImport.update({
   path: '/courses',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,18 +67,22 @@ const EventsEventIdRoute = EventsEventIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/courses': typeof CoursesRoute
   '/donate': typeof DonateRoute
   '/events': typeof EventsRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/schedule': typeof ScheduleRoute
   '/volunteer': typeof VolunteerRoute
   '/events/$eventId': typeof EventsEventIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/courses': typeof CoursesRoute
   '/donate': typeof DonateRoute
   '/events': typeof EventsRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/schedule': typeof ScheduleRoute
   '/volunteer': typeof VolunteerRoute
   '/events/$eventId': typeof EventsEventIdRoute
@@ -74,9 +90,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/courses': typeof CoursesRoute
   '/donate': typeof DonateRoute
   '/events': typeof EventsRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/schedule': typeof ScheduleRoute
   '/volunteer': typeof VolunteerRoute
   '/events/$eventId': typeof EventsEventIdRoute
@@ -85,27 +103,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/courses'
     | '/donate'
     | '/events'
+    | '/gallery'
     | '/schedule'
     | '/volunteer'
     | '/events/$eventId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/courses'
     | '/donate'
     | '/events'
+    | '/gallery'
     | '/schedule'
     | '/volunteer'
     | '/events/$eventId'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/courses'
     | '/donate'
     | '/events'
+    | '/gallery'
     | '/schedule'
     | '/volunteer'
     | '/events/$eventId'
@@ -113,9 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CoursesRoute: typeof CoursesRoute
   DonateRoute: typeof DonateRoute
   EventsRoute: typeof EventsRouteWithChildren
+  GalleryRoute: typeof GalleryRoute
   ScheduleRoute: typeof ScheduleRoute
   VolunteerRoute: typeof VolunteerRoute
 }
@@ -134,6 +160,13 @@ declare module '@tanstack/react-router' {
       path: '/schedule'
       fullPath: '/schedule'
       preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -155,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -187,9 +227,11 @@ const EventsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CoursesRoute: CoursesRoute,
   DonateRoute: DonateRoute,
   EventsRoute: EventsRouteWithChildren,
+  GalleryRoute: GalleryRoute,
   ScheduleRoute: ScheduleRoute,
   VolunteerRoute: VolunteerRoute,
 }

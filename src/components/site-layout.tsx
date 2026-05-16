@@ -37,16 +37,20 @@ export function EmergencyBanner() {
   );
 }
 
-const navLinks: { label: string; to: "/" | "/events" | "/courses" | "/volunteer" }[] = [
+const navLinks: { label: string; to: "/" | "/about" | "/events" | "/gallery" | "/courses" | "/volunteer" }[] = [
   { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   { label: "Events", to: "/events" },
+  { label: "Gallery", to: "/gallery" },
   { label: "Courses", to: "/courses" },
   { label: "Rakan St John", to: "/volunteer" },
 ];
 
 function isNavActive(pathname: string, to: (typeof navLinks)[number]["to"]) {
   if (to === "/") return pathname === "/";
+  if (to === "/about") return pathname === "/about" || pathname.startsWith("/about/");
   if (to === "/events") return pathname === "/events" || pathname.startsWith("/events/");
+  if (to === "/gallery") return pathname === "/gallery";
   return pathname === to || (to === "/courses" && pathname === "/schedule");
 }
 
@@ -133,6 +137,11 @@ export function SiteFooter({ id }: { id?: string }) {
             <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Explore</h4>
             <ul className="space-y-3 text-sm">
               <li>
+                <Link to="/about" className="hover:text-primary">
+                  About
+                </Link>
+              </li>
+              <li>
                 <Link to="/donate" className="hover:text-primary">
                   Donate
                 </Link>
@@ -140,6 +149,11 @@ export function SiteFooter({ id }: { id?: string }) {
               <li>
                 <Link to="/events" className="hover:text-primary">
                   Events
+                </Link>
+              </li>
+              <li>
+                <Link to="/gallery" className="hover:text-primary">
+                  Event gallery
                 </Link>
               </li>
               <li>
@@ -153,8 +167,13 @@ export function SiteFooter({ id }: { id?: string }) {
                 </Link>
               </li>
               <li>
-                <Link to="/" hash="services" className="hover:text-primary">
-                  Services
+                <Link to="/about" hash="ambulance-services" className="hover:text-primary">
+                  Ambulance services
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" hash="blood-donation" className="hover:text-primary">
+                  Blood donation
                 </Link>
               </li>
             </ul>
