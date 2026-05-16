@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   vite: {
-    base: "/sjamsde-web/",
+    base: process.env.GITHUB_PAGES_BASE ?? "/",
     plugins: [tsconfigPaths()],
     resolve: {
       alias: {
