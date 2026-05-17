@@ -1,8 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CheckCircle2, Phone, Plus } from "lucide-react";
-import type { ReactNode } from "react";
+import { CheckCircle2, Menu, Phone, Plus } from "lucide-react";
+import { useState, type ReactNode } from "react";
 
 import { StoreDownloadBadges } from "@/components/store-download-badges";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { SITE_CONTACT_EMAIL, SITE_FOOTER_INTRO } from "@/lib/site-footer-content";
 import { cn } from "@/lib/utils";
 
@@ -54,26 +62,91 @@ function isNavActive(pathname: string, to: (typeof navLinks)[number]["to"]) {
   return pathname === to || (to === "/courses" && pathname === "/schedule");
 }
 
+function navLinkClassName(pathname: string, to: (typeof navLinks)[number]["to"], mobile = false) {
+  return cn(
+    mobile
+      ? "flex items-center h-11 px-3 rounded-lg text-base font-medium transition-colors"
+      : "hover:text-primary transition-colors",
+    isNavActive(pathname, to)
+      ? mobile
+        ? "bg-primary/10 text-primary"
+        : "text-primary"
+      : mobile
+        ? "text-foreground hover:bg-muted"
+        : undefined,
+  );
+}
+
+function MobileSiteNav({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <button
+          type="button"
+          className="inline-flex items-center justify-center size-10 rounded-md border border-border text-foreground hover:bg-muted transition-colors"
+          aria-label="Open menu"
+        >
+          <Menu className="size-5" />
+        </button>
+      </SheetTrigger>
+      <SheetContent side="right" className="w-[min(100vw-2rem,20rem)] p-0 flex flex-col">
+        <SheetHeader className="px-6 pt-6 pb-4 border-b border-border text-left">
+          <SheetTitle className="text-base font-semibold">Menu</SheetTitle>
+        </SheetHeader>
+        <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1">
+          {navLinks.map((item) => (
+            <SheetClose asChild key={item.to}>
+              <Link to={item.to} className={navLinkClassName(pathname, item.to, true)}>
+                {item.label}
+              </Link>
+            </SheetClose>
+          ))}
+          <SheetClose asChild>
+            <Link
+              to="/donate"
+              className={cn(
+                "mt-2 inline-flex items-center justify-center gap-1.5 h-11 px-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-secondary transition-colors",
+                pathname === "/donate" && "ring-2 ring-primary/30",
+              )}
+            >
+              <Plus className="size-4" strokeWidth={2.5} />
+              Donate
+            </Link>
+          </SheetClose>
+        </nav>
+        <div className="px-6 py-4 border-t border-border bg-muted/40">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
+            24hr emergency
+          </p>
+          <a href="tel:0333715005" className="text-lg font-semibold tabular-nums text-primary hover:text-secondary">
+            03-3371 5005
+          </a>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/85">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 shrink-0">
-          <StJohnCross className="size-10" />
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm font-semibold">St John Ambulans Malaysia</span>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Selangor Darul Ehsan</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 min-w-0">
+          <StJohnCross className="size-9 sm:size-10 shrink-0" />
+          <div className="flex flex-col leading-tight min-w-0">
+            <span className="text-xs sm:text-sm font-semibold truncate">St John Ambulans Malaysia</span>
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-muted-foreground truncate">
+              Selangor Darul Ehsan
+            </span>
           </div>
         </Link>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
           {navLinks.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={cn("hover:text-primary transition-colors", isNavActive(pathname, item.to) && "text-primary")}
-            >
+            <Link key={item.to} to={item.to} className={navLinkClassName(pathname, item.to)}>
               {item.label}
             </Link>
           ))}
@@ -88,12 +161,16 @@ export function SiteHeader() {
             Donate
           </Link>
         </nav>
-        <Link
-          to="/donate"
-          className="lg:hidden inline-flex items-center gap-1.5 h-9 px-3 bg-primary text-primary-foreground rounded-md text-sm font-medium"
-        >
-          Donate
-        </Link>
+        <div className="lg:hidden flex items-center gap-2 shrink-0">
+          <Link
+            to="/donate"
+            className="inline-flex items-center gap-1 h-9 px-3 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-secondary transition-colors"
+          >
+            <Plus className="size-4" strokeWidth={2.5} />
+            <span className="sr-only sm:not-sr-only">Donate</span>
+          </Link>
+          <MobileSiteNav pathname={pathname} />
+        </div>
       </div>
     </header>
   );
